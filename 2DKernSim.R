@@ -139,24 +139,22 @@
 	mtext("Distance from pole" , side = 1 , line = 2.25)
 
 	# Continuous box plots
-	box.stats.w <- boxplot(w.mat)$stats[-3,]
-	box.stats.f <- boxplot(f.mat)$stats[-3,]
+	box.stats.w <- boxplot(w.mat , plot = F)$stats[-3,]
+	box.stats.f <- boxplot(f.mat , plot = F)$stats[-3,]
 
-	plot(0 , type = "n" , ylim = c(0, max(w.mat)) , xlim = c(0,40) , axes = F , xlab = "" , ylab = "")
-	polygon(c(1:40,40:1),c(box.stats.w[4,],rev(box.stats.w[1,])) , col = "grey70" , border = F)
-	polygon(c(1:40,40:1),c(box.stats.w[3,],rev(box.stats.w[2,])) , col = "grey40" , border = F)
+	par(mfrow = c(1,2) , mar = c(4,5,0,0) , oma = c(1,1,1,1))
+	plot(0 , type = "n" , ylim = c(0, max(w.mat)) , xlim = c(0,length(box.stats.w[4,])) , xlab = "Distance from pole" , ylab = "Probability" , las = 1)
+	polygon(c(1:length(box.stats.w[4,]),length(box.stats.w[4,]):1),c(box.stats.w[4,],rev(box.stats.w[1,])) , col = "grey70" , border = F)
+	polygon(c(1:length(box.stats.w[4,]),length(box.stats.w[4,]):1),c(box.stats.w[3,],rev(box.stats.w[2,])) , col = "grey40" , border = F)
 	#lines(c.wr.mean , col = "black" , lwd = 2 , lend = 1)
 	abline(h = 0 , lwd = 0.75 , col = "black")
 	box()
 	axis(1 , labels = F)
-	axis(2 , las = 1)
-	mtext("Probability" , side = 2 , line = 3)
 
-	plot(0 , type = "n" , ylim = c(0, max(c.f.mat)) , xlim = c(0,40) , axes = F , xlab = "" , ylab = "")
-	polygon(c(1:40,40:1),c(box.stats.f[4,],rev(box.stats.f[1,])) , col = "grey70" , border = F)
-	polygon(c(1:40,40:1),c(box.stats.f[3,],rev(box.stats.f[2,])) , col = "grey40" , border = F)
+	plot(0 , type = "n" , ylim = c(0, max(f.mat)) , xlim = c(0, length(box.stats.f[4,])) , xlab = "Distance from pole" , ylab = "" , las = 1)
+	polygon(c(1:length(box.stats.f[4,]),length(box.stats.f[4,]):1),c(box.stats.f[4,],rev(box.stats.f[1,])) , col = "grey70" , border = F)
+	polygon(c(1:length(box.stats.f[4,]),length(box.stats.f[4,]):1),c(box.stats.f[3,],rev(box.stats.f[2,])) , col = "grey40" , border = F)
 	#lines(c.fr.mean , col = "black" , lwd = 2 , lend = 1)
 	abline(h = 0 , lwd = 0.75 , col = "black")
 	box()
 	axis(1 , labels = F)
-	axis(2 , las = 1)
